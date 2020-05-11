@@ -198,7 +198,7 @@ public class PrinterManager {
                 break;
             case "QL-1110NWB":
             case "QL_1110NWB":
-                info.labelNameIndex = LabelInfo.QL1100.W103H164.ordinal();
+                info.labelNameIndex = LabelInfo.QL1100.W103.ordinal();
                 info.printMode = PrinterInfo.PrintMode.FIT_TO_PAGE;
                 info.isAutoCut = true;
                 break;
