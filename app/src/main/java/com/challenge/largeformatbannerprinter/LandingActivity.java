@@ -360,32 +360,16 @@ public class LandingActivity extends AppCompatActivity {
         findViewById(R.id.larger_margins).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrintableGenerator.MARGIN = 0.05f;
+                PrintableGenerator.MARGIN = 0.025f;
                 recreatePrintables();
             }
         });
 
-        findViewById(R.id.print).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.largest_margin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (PrinterManager.getPrinter() == null) {
-                    String name = "NotesForSupportOutput.png";
-                    if (text_data.length > 0) {
-                        name = text_data[0].split("\n")[0]
-                                .replaceAll("[^a-zA-Z0-9 ]", "")
-                                .replaceAll(" ", "_")
-                                .toUpperCase()
-                                 + ".png";
-                    }
-                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.setType("image/png");
-                    intent.putExtra(Intent.EXTRA_TITLE, name);
-                    startActivityForResult(intent, REQUEST_WRITE_IMAGE);
-                } else {
-                    PrintableItem printable = new PrintableItem(text_data[0]);
-                    PrintableQueue.addItem(printable, getApplicationContext());
-                }
+                PrintableGenerator.MARGIN = 0.05f;
+                recreatePrintables();
             }
         });
 

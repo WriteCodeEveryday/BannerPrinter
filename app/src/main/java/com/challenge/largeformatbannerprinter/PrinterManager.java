@@ -130,22 +130,23 @@ public class PrinterManager {
     }
 
     private static void setPJCustomPaper() {
-        float margins = 0.0f;
-        float width = 215.9f;
-        CustomPaperInfo customPaperInfo;
-        customPaperInfo = CustomPaperInfo.newCustomRollPaper(info.printerModel,
-                Unit.Mm,
-                width,
-                margins,
-                margins,
-                margins);
-        List<Map<CustomPaperInfo.ErrorParameter, CustomPaperInfo.ErrorDetail>> errors = info.setCustomPaperInfo(customPaperInfo);
-        if (errors.isEmpty() == false) {
-            System.out.println(errors.toString());
-            return;
-        }
         info.paperSize = PrinterInfo.PaperSize.CUSTOM;
-        info.printMode = PrinterInfo.PrintMode.FIT_TO_PAGE;
+        info.printMode = PrinterInfo.PrintMode.FIT_TO_PAPER;
+    }
+
+    public static void setPJDimensions(double width, double height) {
+        int dpi = 300;
+        int width_dots = (int) width * dpi;
+        int height_dots = (int) height * dpi;
+
+        System.out.println("Original Data: " + width + "," + height + "\n" +
+                "Dots: " + width_dots +  "," + height_dots);
+
+        info.paperSize = PrinterInfo.PaperSize.CUSTOM;
+        info.printMode = PrinterInfo.PrintMode.FIT_TO_PAPER;
+        info.customPaperWidth = width_dots;
+        info.customPaperLength = height_dots;
+        printer.setPrinterInfo(info);
     }
 
     public static void loadLabel() {

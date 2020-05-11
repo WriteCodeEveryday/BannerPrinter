@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class PrintableGenerator {
-    public static int MAX_SIZE = 2048;
+    public static int MAX_SIZE = 2550;
     public static float MARGIN = 0.05f;
 
     public static HashMap<String, Typeface> fonts = new HashMap<String, Typeface>();

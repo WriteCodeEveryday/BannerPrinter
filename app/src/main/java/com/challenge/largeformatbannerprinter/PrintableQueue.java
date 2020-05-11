@@ -18,12 +18,25 @@ public class PrintableQueue {
         if (runnable == null) {
             runnable = new Thread() {
                 public void run() {
+                    if (PrinterManager.getModel().toLowerCase().contains("pj")) {
+                        if (items.size() > 0) {
+                            double inches = 8.5;
+                            PrintableItem printed = items.peek();
+                            PrintableGenerator pr = new PrintableGenerator(ctx);
+                            Bitmap bmp = pr.buildOutput(printed);
+                            double[] physical = new double[] {
+                                    inches,
+                                    ((bmp.getHeight() * inches) / bmp.getWidth())
+                            };
+                            PrinterManager.setPJDimensions(physical[0], physical[1]);
+                        }
+                    }
                     System.out.println("Printing");
                     Printer temp = PrinterManager.getPrinter();
                     temp.startCommunication();
 
                     try {
-                        while (items.size() > 0) {
+                        if (items.size() > 0) {
                             PrintableItem printed = items.pop();
                             PrintableGenerator pr = new PrintableGenerator(ctx);
                             Bitmap bmp = pr.buildOutput(printed);
